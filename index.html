@@ -28,7 +28,7 @@
    <div id="empty" class="empty"><div class="empty-icon">▦</div><h3>你的採購資料，集中在這裡。</h3><p>管理員登入後即可查找並修正資料。<br>也可以先用示範資料體驗操作。</p><button id="demo" class="primary">體驗示範操作</button><small>示範資料為虛構內容，不會寫入公司檔案。</small></div>
    <footer class="table-footer"><span id="results">尚未載入資料</span><div><button id="prev" aria-label="上一頁">←</button><span id="page">1 / 1</span><button id="next" aria-label="下一頁">→</button></div></footer>
   </section>
-  <div class="footnote">公司資料連線尚未啟用。啟用後僅回寫「供應商編號（測試）.xlsx」；會先備份，再由同步電腦更新，正式主檔與庫存不會連動。</div>
+  <div class="footnote">僅回寫「供應商編號（測試）.xlsx」；會先備份，再由同步電腦更新，正式主檔與庫存不會連動。請在修改紀錄確認回寫結果。</div>
  </section>
  <section id="jobs-view" hidden><div class="intro"><div><h2>每次修改，都有跡可循。</h2><p>「等待同步」代表已排入工作；只有「已完成」才代表 Excel 已回寫。</p></div><button id="refresh-jobs">↻ 更新紀錄</button></div><div id="jobs" class="panel history"></div></section>
  <section id="help-view" hidden class="help panel"><span class="eyebrow">開始使用</span><h2>從 LINE 到網頁，接著完成採購工作。</h2><ol><li><b>取得登入碼</b><p>由現有管理員私訊 LINE 採購助理「網頁登入」。登入碼 10 分鐘有效、只能使用一次；登入後有效 8 小時。</p></li><li><b>找到品項並修正</b><p>搜尋產品代碼、品名或供應商，再按「編輯」。可修改 INCI、幣別、單價、計價單位、MOQ、製造商、保存期限及備註。</p></li><li><b>核對差異後確認</b><p>先預覽修改前後的內容，再確認送出。若主檔已被其他人更新，系統會要求重新整理，以免蓋掉新資料。</p></li><li><b>檢查同步結果</b><p>在「修改紀錄」查看結果。同步電腦需開機且能連到共享資料夾；請關閉正在編輯的 Excel。失敗時先處理原因，再重新整理與編輯。</p></li></ol><div class="help-note">第一版編輯的是測試主檔，與 LINE 的測試回寫流程共用。LINE 一般查詢可能使用另一份查詢主檔，因此不保證立即反映此處修改。供應商身分、品名與分類需依既有建檔流程處理；這裡不支援刪除或清空欄位。</div><a class="button primary" href="https://lin.ee/yTqJcG6" target="_blank" rel="noopener noreferrer">開啟 LINE 採購助理 ↗</a></section>
