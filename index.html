@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://elg-procurement-line.elg-tw99.workers.dev; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>依洛嘉｜採購管理台</title>
+<meta name="description" content="依洛嘉採購管理台：查找品項、核對資料、預覽修改與追蹤回寫。">
+<link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head>
+<body>
+<aside class="sidebar">
+ <a class="brand" href="./"><span class="brand-mark">E</span><span>依洛嘉<small>採購管理台</small></span></a>
+ <div class="sidebar-label">工作空間</div>
+ <nav aria-label="主要導覽"><button class="nav active" data-view="catalog"><span>▦</span> 品項資料</button><button class="nav" data-view="jobs"><span>↺</span> 修改紀錄</button><button class="nav" data-view="help"><span>?</span> 使用說明</button></nav>
+ <div class="sidebar-bottom"><span class="dot"></span> 與 LINE 採購助理協作<p>查找・核對・確認・留存</p><small>ELG PROCUREMENT / 01</small></div>
+</aside>
+<main>
+ <header><div><span class="eyebrow">採購工作空間</span><h1 id="page-title">品項資料</h1></div><div class="header-actions"><span id="mode" class="pill">尚未登入</span><button id="login-open">管理員登入</button><button id="logout" hidden>登出</button></div></header>
+ <div id="notice" role="status" aria-live="polite" hidden></div>
+ <section id="catalog-view">
+  <div class="intro"><div><h2>把資料整理好，讓採購更順手。</h2><p>找到需要的品項，直接修正欄位，核對差異後再儲存。</p></div><button id="refresh">↻ 重新整理</button></div>
+  <div class="stats"><article><span>品項總數</span><strong id="count">—</strong><small>目前載入的主檔</small></article><article><span>供應商</span><strong id="suppliers">—</strong><small>依廠商編號統計</small></article><article><span>資料待補</span><strong id="missing">—</strong><small>單價、幣別或單位未完整</small></article><article class="connection"><span>電腦同步</span><strong id="bridge">未連線</strong><small id="sync-time">登入後查看同步狀態</small></article></div>
+  <div class="source-bar"><span id="source">登入後載入採購資料</span><span>價格為登記值，使用前請確認報價有效性。</span></div>
+  <section class="panel">
+   <div class="toolbar"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜尋品名、產品代碼、供應商或 INCI" aria-label="搜尋品項"></label><select id="category" aria-label="篩選分類"><option value="">所有分類</option><option>原料</option><option>物料</option><option>包材</option></select><label class="check"><input id="missing-only" type="checkbox">只看待補</label></div>
+   <div class="table-wrap"><table><thead><tr><th>品項 / 產品代碼</th><th>供應商</th><th>分類</th><th>登記單價</th><th>資料狀態</th><th><span class="sr-only">操作</span></th></tr></thead><tbody id="rows"></tbody></table></div>
+   <div id="empty" class="empty"><div class="empty-icon">▦</div><h3>你的採購資料，集中在這裡。</h3><p>管理員登入後即可查找並修正資料。<br>也可以先用示範資料體驗操作。</p><button id="demo" class="primary">體驗示範操作</button><small>示範資料為虛構內容，不會寫入公司檔案。</small></div>
+   <footer class="table-footer"><span id="results">尚未載入資料</span><div><button id="prev" aria-label="上一頁">←</button><span id="page">1 / 1</span><button id="next" aria-label="下一頁">→</button></div></footer>
+  </section>
+  <div class="footnote">公司資料連線尚未啟用。啟用後僅回寫「供應商編號（測試）.xlsx」；會先備份，再由同步電腦更新，正式主檔與庫存不會連動。</div>
+ </section>
+ <section id="jobs-view" hidden><div class="intro"><div><h2>每次修改，都有跡可循。</h2><p>「等待同步」代表已排入工作；只有「已完成」才代表 Excel 已回寫。</p></div><button id="refresh-jobs">↻ 更新紀錄</button></div><div id="jobs" class="panel history"></div></section>
+ <section id="help-view" hidden class="help panel"><span class="eyebrow">開始使用</span><h2>從 LINE 到網頁，接著完成採購工作。</h2><ol><li><b>取得登入碼</b><p>由現有管理員私訊 LINE 採購助理「網頁登入」。登入碼 10 分鐘有效、只能使用一次；登入後有效 8 小時。</p></li><li><b>找到品項並修正</b><p>搜尋產品代碼、品名或供應商，再按「編輯」。可修改 INCI、幣別、單價、計價單位、MOQ、製造商、保存期限及備註。</p></li><li><b>核對差異後確認</b><p>先預覽修改前後的內容，再確認送出。若主檔已被其他人更新，系統會要求重新整理，以免蓋掉新資料。</p></li><li><b>檢查同步結果</b><p>在「修改紀錄」查看結果。同步電腦需開機且能連到共享資料夾；請關閉正在編輯的 Excel。失敗時先處理原因，再重新整理與編輯。</p></li></ol><div class="help-note">第一版編輯的是測試主檔，與 LINE 的測試回寫流程共用。LINE 一般查詢可能使用另一份查詢主檔，因此不保證立即反映此處修改。供應商身分、品名與分類需依既有建檔流程處理；這裡不支援刪除或清空欄位。</div><a class="button primary" href="https://lin.ee/yTqJcG6" target="_blank" rel="noopener noreferrer">開啟 LINE 採購助理 ↗</a></section>
+ <footer class="page-footer">依洛嘉 ELG <span>讓每一筆資料，都更清楚。</span></footer>
+</main>
+<dialog id="login-dialog"><form id="login-form"><div class="dialog-head"><div><span class="eyebrow">管理員專用</span><h2>登入採購管理台</h2></div><button type="button" data-close="login-dialog" aria-label="關閉登入">×</button></div><p>請先私訊 LINE 採購助理 <b>「網頁登入」</b>，再將收到的一次性登入碼貼在下方。</p><label>一次性登入碼<input id="login-code" required autocomplete="off" spellcheck="false" maxlength="32" placeholder="貼上 LINE 收到的登入碼"></label><p class="muted">僅現有兩位管理員可登入。登入資料只保留在這個分頁，登出後清除。</p><div id="login-error" role="alert"></div><div class="dialog-actions"><a href="https://lin.ee/yTqJcG6" target="_blank" rel="noopener noreferrer">開啟 LINE ↗</a><button class="primary" id="login-submit">登入</button></div></form></dialog>
+<dialog id="edit-dialog"><form id="edit-form"><div class="dialog-head"><div><span class="eyebrow">編輯品項資料</span><h2 id="edit-name"></h2><p id="edit-meta" class="muted"></p></div><button type="button" data-close="edit-dialog" aria-label="關閉編輯">×</button></div><div class="info">供應商、品名與分類保持原樣。只送出有修改的欄位。</div><div id="fields" class="form-grid"></div><div id="edit-error" role="alert"></div><div class="dialog-actions"><button type="button" data-close="edit-dialog">取消</button><button class="primary" id="preview-submit">預覽修改 →</button></div></form></dialog>
+<dialog id="preview-dialog"><div class="dialog-head"><div><span class="eyebrow">最後核對</span><h2>確認這次的修改</h2><p id="preview-name"></p></div><button data-close="preview-dialog" aria-label="關閉預覽">×</button></div><div class="table-wrap"><table class="diff"><thead><tr><th>欄位</th><th>修改前</th><th>修改後</th></tr></thead><tbody id="diff-rows"></tbody></table></div><p id="preview-note" class="info"></p><div id="confirm-error" role="alert"></div><div class="dialog-actions"><button data-close="preview-dialog">返回編輯</button><button id="confirm" class="primary">確認送出</button></div></dialog>
+</body></html>
