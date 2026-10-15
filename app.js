@@ -1,7 +1,7 @@
 'use strict';
 const API='https://elg-procurement-line.elg-tw99.workers.dev/web';
 // Enable only after the protected backend has been deployed and verified.
-const BACKEND_ENABLED=false;
+const BACKEND_ENABLED=true;
 const $=id=>document.getElementById(id);
 const labels={inci:'INCI',currency:'幣別',price:'單價',unit:'計價單位',moq:'最低訂購量 MOQ',manufacturer:'製造商',shelfLife:'保存期限',notes:'備註'};
 const states={queued:'等待同步',leased:'回寫處理中',complete:'已完成',failed:'回寫失敗',held:'待重新核對',superseded:'已由其他工作取代'};
